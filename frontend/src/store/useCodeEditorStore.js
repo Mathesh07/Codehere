@@ -152,9 +152,9 @@ export const useCodeEditorStore = create((set, get) => {
       const { getCode, setComplexity } = get();
       const code = getCode();
 
-      set({ isAnalyzing: true }); 
+      set({ isAnalyzing: true }); // ⬅️ start loader
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/calculate`, {
+        const res = await fetch("http://localhost:5000/calculate", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ code }),
@@ -166,7 +166,7 @@ export const useCodeEditorStore = create((set, get) => {
         console.error("Complexity fetch failed:", error);
         setComplexity("Error", "Error");
       } finally {
-        set({ isAnalyzing: false }); 
+        set({ isAnalyzing: false }); // ⬅️ stop loader
       }
     },
   };
