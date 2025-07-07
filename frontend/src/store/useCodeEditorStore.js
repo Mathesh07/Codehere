@@ -3,6 +3,7 @@ import { create } from "zustand";
 import { LANGUAGE_CONFIG } from "../constants";
 import * as monaco from "monaco-editor";
 
+
 const JUDGE0_API_KEY = "9128574bdamsh5f499a697729a19p19e018jsn0fc166e31a3d";
 
 const getInitialState = () => {
@@ -153,7 +154,7 @@ export const useCodeEditorStore = create((set, get) => {
 
       set({ isAnalyzing: true }); // ⬅️ start loader
       try {
-        const res = await fetch("http://localhost:5000/calculate", {
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/calculate`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ code }),
