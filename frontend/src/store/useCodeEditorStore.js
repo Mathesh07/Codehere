@@ -154,7 +154,7 @@ export const useCodeEditorStore = create((set, get) => {
 
       set({ isAnalyzing: true }); // ⬅️ start loader
       try {
-        const res = await fetch("http://localhost:5000/calculate", {
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/calculate`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ code }),
